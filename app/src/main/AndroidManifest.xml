@@ -19,7 +19,13 @@
         <activity
             android:name=".ui.SnoozeActivity"
             android:label="@string/title_activity_snooze" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
+        <receiver android:name=".AlarmReciever"/>
     </application>
-
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 </manifest>
