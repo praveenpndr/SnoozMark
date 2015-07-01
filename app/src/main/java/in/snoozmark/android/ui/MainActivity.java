@@ -12,6 +12,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import in.snoozmark.android.BaseActivity;
+import in.snoozmark.android.CustomListAdapter;
 import in.snoozmark.android.R;
 import in.snoozmark.android.database.BookMark;
 import io.realm.Realm;
@@ -45,6 +46,11 @@ public class MainActivity extends BaseActivity {
             linkAlarm[i] = lot.getLinkAlarmTime();
             i++;
         }
+
+        CustomListAdapter adapter;
+        adapter = new CustomListAdapter(MainActivity.this, linkUrl, linkAlarm);
+        list = (ListView) findViewById(R.id.list);
+        list.setAdapter(adapter);
     }
 
     public void gotoSnooze(View view){

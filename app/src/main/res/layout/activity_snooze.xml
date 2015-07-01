@@ -6,7 +6,71 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="in.snoozmark.android.ui.SnoozeActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:id="@+id/link">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Link:"
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:id="@+id/sharedLink"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/link"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+
+        android:id="@+id/minutes">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/sharedLink"
+
+            android:gravity="left"
+            android:text="Choose minutes to snooze: "/>
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="15dp"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/minPicker"
+
+            android:gravity="left"/>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Snooze"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:onClick="setSnooze"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>
