@@ -44,9 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/sharedLink"
-
+            android:fontFamily="@string/abc_action_bar_home_description"
+            android:textSize="10sp"
+            android:textStyle="bold"
             android:gravity="left"
-            android:text="Choose minutes to snooze: "/>
+            android:text="Snooze for"/>
 
         <NumberPicker
             android:layout_width="wrap_content"

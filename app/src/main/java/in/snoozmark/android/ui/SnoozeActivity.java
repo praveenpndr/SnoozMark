@@ -27,6 +27,7 @@ public class SnoozeActivity extends BaseActivity {
     TextView link;
     NumberPicker minPicker;
     String sharedText = "";
+    String sharedTitle = "";
     String localSharedText = "";
 
 
@@ -52,10 +53,11 @@ public class SnoozeActivity extends BaseActivity {
 
     void handleSendText(Intent intent) {
         sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        sharedTitle = intent.getStringExtra(Intent.EXTRA_SUBJECT);
         if (sharedText != null) {
             // Update UI to reflect text being shared
-            link.setText(sharedText);
-            localSharedText = sharedText;
+            link.setText(sharedTitle);
+            localSharedText = sharedTitle;
 
         }
     }
