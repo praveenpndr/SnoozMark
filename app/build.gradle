@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.snoozmark.android"
-        minSdkVersion 22
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile files('libs/realm-0.80.1.jar')
     compile files('libs/realm-0.80.1-javadoc.jar')
+    compile 'com.wdullaer:materialdatetimepicker:1.4.0'
 }

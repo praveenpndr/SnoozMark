@@ -12,21 +12,23 @@
         android:layout_alignParentLeft="true"
         android:gravity="center_horizontal"
         android:layout_marginTop="15dp"
+        android:orientation="vertical"
         android:id="@+id/link">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Link:"
-            android:textSize="15dp"
-            android:layout_gravity="center_vertical"/>
-
-        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:id="@+id/sharedLink"
             />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:id="@+id/weblink"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -36,7 +38,7 @@
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
         android:layout_marginTop="15dp"
-
+        android:orientation="horizontal"
         android:id="@+id/minutes">
 
         <TextView
@@ -45,7 +47,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@id/sharedLink"
             android:fontFamily="@string/abc_action_bar_home_description"
-            android:textSize="10sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:gravity="left"
             android:text="Snooze for"/>
@@ -56,12 +58,18 @@
             android:scrollbarSize="15dp"
             android:layout_marginLeft="30dp"
             android:id="@+id/minPicker"
-
-            android:gravity="left"/>
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hours"
+            android:textSize="10sp"
+            android:layout_marginLeft="10dp"/>
 
 
 
     </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"

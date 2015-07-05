@@ -24,7 +24,8 @@ import in.snoozmark.android.database.BookMark;
 import io.realm.Realm;
 
 public class SnoozeActivity extends BaseActivity {
-    TextView link;
+    TextView webTitle;
+    TextView webLink;
     NumberPicker minPicker;
     String sharedText = "";
     String sharedTitle = "";
@@ -36,9 +37,10 @@ public class SnoozeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snooze);
         setTitle("SnoozMark");
-        link = (TextView) findViewById(R.id.sharedLink);
+        webTitle = (TextView) findViewById(R.id.sharedLink);
+        webLink = (TextView) findViewById(R.id.weblink);
         minPicker = (NumberPicker) findViewById(R.id.minPicker);
-        minPicker.setMaxValue(60);
+        minPicker.setMaxValue(12);
         minPicker.setMinValue(1);
         minPicker.setValue(1);
         Intent intent = getIntent();
@@ -56,8 +58,9 @@ public class SnoozeActivity extends BaseActivity {
         sharedTitle = intent.getStringExtra(Intent.EXTRA_SUBJECT);
         if (sharedText != null) {
             // Update UI to reflect text being shared
-            link.setText(sharedTitle);
-            localSharedText = sharedTitle;
+            webTitle.setText(sharedTitle);
+            webLink.setText(sharedText);
+            localSharedText = sharedText;
 
         }
     }
