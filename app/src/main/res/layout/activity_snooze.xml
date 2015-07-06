@@ -1,5 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -11,24 +13,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:gravity="center_horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
         android:id="@+id/link">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:id="@+id/sharedLink"
             />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:id="@+id/weblink"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:textSize="15sp"
+            android:id="@+id/weblink"/>
 
     </LinearLayout>
     <LinearLayout
@@ -37,7 +37,7 @@
         android:layout_below="@id/link"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal"
         android:id="@+id/minutes">
 
@@ -52,23 +52,67 @@
             android:gravity="left"
             android:text="Snooze for"/>
 
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbarSize="15dp"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/minPicker"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hours"
-            android:textSize="10sp"
-            android:layout_marginLeft="10dp"/>
+       <in.snoozmark.android.MaterialSpinner
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/spinner1"
+           android:layout_marginLeft="15dp"
+           android:layout_marginRight="15dp"
+           android:gravity="center"
+           android:layout_gravity="center_horizontal"
+           app:ms_arrowColor="#0000FF"
+           app:ms_hint="Choose an option   "
+           app:ms_arrowSize="16dp"
+           app:ms_multiline="true" >
+       </in.snoozmark.android.MaterialSpinner>
 
 
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/minutes"
+        android:id="@+id/timelayout">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/timenumbers">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_material_light"
+                android:textSize="50sp"
+                android:layout_toLeftOf="@+id/AM_PM"
+                android:id="@+id/timenum"
+                android:clickable="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_material_light"
+                android:textSize="20sp"
+                android:id="@+id/AM_PM"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timenumbers"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:id="@+id/date_text"
+            android:layout_centerInParent="true"
+            android:textColor="@color/accent_material_light"
+            android:clickable="true"/>
+
+    </RelativeLayout>
 
 
     <Button

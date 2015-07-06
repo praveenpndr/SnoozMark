@@ -2,4 +2,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="underline_top_spacing">8dp</dimen>
+    <dimen name="underline_bottom_spacing">4dp</dimen>
+    <dimen name="error_label_spacing">12dp</dimen>
+
+    <dimen name="floating_label_top_spacing">4dp</dimen>
+    <dimen name="floating_label_bottom_spacing">8dp</dimen>
+    <dimen name="floating_label_inside_spacing">12dp</dimen>
+
+    <dimen name="right_left_spinner_padding">8dp</dimen>
+
+    <dimen name="label_text_size">12sp</dimen>
 </resources>
