@@ -3,8 +3,11 @@ package in.snoozmark.android;
 /**
  * Created by Praveen Panduru on 06/07/15.
  */
+import android.util.Log;
+
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class DateUtils {
 
@@ -254,5 +257,25 @@ public class DateUtils {
 
     /** The maximum date possible. */
     public static Date MAX_DATE = new Date(Long.MAX_VALUE);
+
+    public static String getDateDiff(Date date1, Date date2){
+        long diff = date2.getTime() - date1.getTime();
+        long diffInSeconds = diff / 1000 % 60;
+        long diffInMinutes = diff / (60 * 1000) % 60;
+        long diffInHours = diff / (60 * 60 * 1000) % 24;
+        long diffInDays = diff / (24 * 60 * 60 * 1000);
+        StringBuilder returnString = new StringBuilder();
+        if (diffInDays >= 1){
+            returnString.append(diffInDays+" days ");
+        }
+        if (diffInHours >= 1){
+            returnString.append(diffInHours+" hours ");
+        }
+        if (diffInMinutes >= 1){
+            returnString.append(diffInMinutes+ " minutes ");
+        }
+        Log.d("praveen panduru", "timediff is "+returnString.toString());
+        return returnString.toString();
+    }
 
 }

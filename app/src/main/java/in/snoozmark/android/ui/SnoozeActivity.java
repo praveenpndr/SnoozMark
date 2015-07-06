@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -52,6 +53,7 @@ public class SnoozeActivity extends BaseActivity implements
     private ArrayAdapter<String> adapter;
     MaterialSpinner spinner1;
     static Dialog d ;
+    String months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,8 +203,8 @@ public class SnoozeActivity extends BaseActivity implements
             am_pm = "AM";
             hourValue = hourint;
         }
-
-        datenum.setText(hourValue + ":00");
+        String curTime = String.format("%02d:%02d", hourValue, 00);
+        datenum.setText(curTime);
         dateam_pm.setText(am_pm);
     }
 
@@ -225,8 +227,8 @@ public class SnoozeActivity extends BaseActivity implements
         else{
             AM_PM = "PM";
         }
-
-        datenum.setText(hour + ":" + min);
+        String curTime = String.format("%02d:%02d", hour, min);
+        datenum.setText(curTime);
         dateam_pm.setText(AM_PM);
         if(DateUtils.isSameDay(caltoday, cal))
             datetext.setText("TODAY");
@@ -264,7 +266,8 @@ public class SnoozeActivity extends BaseActivity implements
         if(datetext.getText() == "TODAY" || datetext.getText() == "TOMORROW")
             datetext.setText(day);
         dateam_pm.setText(am_pm);
-        datenum.setText(hourValue + ":" + min);
+        String curTime = String.format("%02d:%02d", hourValue, min);
+        datenum.setText(curTime);
 
     }
 
@@ -279,7 +282,7 @@ public class SnoozeActivity extends BaseActivity implements
         }
         String dayString;
         caldate.set(year, month, day, hours, minutes);
-        String months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+
         if (DateUtils.isSameDay(caldate, caltoday))
             dayString = "TODAY";
         else if (DateUtils.isWithinDaysFuture(caldate,1))
@@ -306,8 +309,45 @@ public class SnoozeActivity extends BaseActivity implements
         // time at which alarm will be scheduled here alarm is scheduled at 1 day from current time,
         // we fetch  the current time in milliseconds and added 1 day time
         // i.e. 24*60*60*1000= 86,400,000   milliseconds in a day
-        Integer minutes = minPicker.getValue();
-        Long time = new GregorianCalendar().getTimeInMillis()+ minutes*1000;
+
+        Calendar cal = Calendar.getInstance();
+        Calendar caltoday = Calendar.getInstance();
+        String dateString = datetext.getText().toString();
+        String timeString = datenum.getText().toString();
+        String ampmString = dateam_pm.getText().toString();
+        int year, month, day, hour, min;
+        if(dateString.equalsIgnoreCase("TODAY")){
+            year = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+        }
+        else if (dateString.equalsIgnoreCase("TOMORROW")){
+            cal.add(Calendar.DATE,1);
+            year = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+        }
+        else {
+            year = Integer.parseInt(dateString.split(" ")[2]);
+            month = Arrays.asList(months).indexOf(dateString.split(" ")[1]) + 1;
+            day = Integer.parseInt(dateString.split(" ")[0]);
+        }
+        if(ampmString == "AM"){
+            if(Integer.parseInt(timeString.split(":")[0]) == 12)
+                hour = 0;
+            else
+                hour = Integer.parseInt(timeString.split(":")[0]);
+        }
+        else{
+            if(Integer.parseInt(timeString.split(":")[0]) == 12)
+                hour = Integer.parseInt(timeString.split(":")[0]);
+            else
+                hour = Integer.parseInt(timeString.split(":")[0]) + 12;
+        }
+        min = Integer.parseInt(timeString.split(":")[1]);
+
+        cal.set(year,month,day,hour,min);
+        Long time = cal.getTimeInMillis();
 
         // create an Intent and set the class which will execute when Alarm triggers, here we have
         // given AlarmReciever in the Intent, the onRecieve() method of this class will execute when
@@ -321,8 +361,8 @@ public class SnoozeActivity extends BaseActivity implements
         int requestID = (int) System.currentTimeMillis();
 
         //set the alarm for particular time
-        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this, requestID, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-        Toast.makeText(this, "Alarm Scheduled for " + minPicker.getValue() + "minutes", Toast.LENGTH_LONG).show();
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(this, requestID, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        Toast.makeText(this, "Snooze set for " + DateUtils.getDateDiff(caltoday.getTime(), cal.getTime()) + "from now", Toast.LENGTH_LONG).show();
 
         Realm realm = Realm.getInstance(getBaseContext());
         realm.beginTransaction();
@@ -342,6 +382,7 @@ public class SnoozeActivity extends BaseActivity implements
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
