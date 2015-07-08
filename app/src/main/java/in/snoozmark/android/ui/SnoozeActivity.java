@@ -160,7 +160,7 @@ public class SnoozeActivity extends BaseActivity implements
         hourPicker.setMinValue(0);
         hourPicker.setMaxValue(12);
         hourPicker.setValue(0);
-        minPicker.setMinValue(0);
+        minPicker.setMinValue(1);
         minPicker.setMaxValue(60);
         minPicker.setValue(30);
 
@@ -355,6 +355,7 @@ public class SnoozeActivity extends BaseActivity implements
         //we will write the code to send SMS inside onRecieve() method pf Alarmreciever class
         Intent intentAlarm = new Intent(this, AlarmReciever.class);
         intentAlarm.putExtra("Link",sharedText);
+        intentAlarm.putExtra("LinkTitle", sharedTitle);
 
         // create the object
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
