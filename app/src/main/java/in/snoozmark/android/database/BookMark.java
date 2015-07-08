@@ -16,7 +16,7 @@ public class BookMark extends RealmObject{
 
     private String linkUrl;
     private String linkAlarmTime;
-   // private String linkTitle;
+    private String linkTitle;
 
     public int getLinkId() {
         return linkId;
@@ -41,7 +41,7 @@ public class BookMark extends RealmObject{
     public void setLinkAlarmTime(String linkAlarmTime) {
         this.linkAlarmTime = linkAlarmTime;
     }
-/*
+
     public String getLinkTitle() {
         return linkTitle;
     }
@@ -49,5 +49,5 @@ public class BookMark extends RealmObject{
     public void setLinkTitle(String linkTitle) {
         this.linkTitle = linkTitle;
     }
-    */
+
 }

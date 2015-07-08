@@ -1,16 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="in.snoozmark.android.ui.BookmarkList">
 
-    <ListView
-        android:id="@+id/list"
+    <it.neokree.materialtabs.MaterialTabHost
+        android:id="@+id/materialTabHost"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        >
-    </ListView>
+        android:layout_height="48dp"
+        app:textColor="#FFFFFF"
+        app:primaryColor="#3F51B5"
+        app:accentColor="#FF5722" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/materialTabHost">
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

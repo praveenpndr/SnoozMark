@@ -2,7 +2,11 @@ package in.snoozmark.android.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,17 +21,57 @@ import in.snoozmark.android.database.BookMark;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import it.neokree.materialtabs.MaterialTab;
+import it.neokree.materialtabs.MaterialTabHost;
+import it.neokree.materialtabs.MaterialTabListener;
 
-public class BookmarkList extends BaseActivity {
+public class BookmarkList extends BaseActivity implements MaterialTabListener{
 
     ListView list;
-    String[] linkUrl ;
-    String[] linkAlarm;
+    String[] linkUrl, linkAlarm, linkTitle ;
+    MaterialTabHost tabHost;
+    ViewPager pager;
+    ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark_list);
+
+
+        tabHost = (MaterialTabHost) this.findViewById(R.id.materialTabHost);
+        pager = (ViewPager) this.findViewById(R.id.pager);
+
+        // init view pager
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(adapter);
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // when user do a swipe the selected tab change
+                tabHost.setSelectedNavigationItem(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        // insert all tabs from pagerAdapter data
+        for (int i = 0; i < adapter.getCount(); i++) {
+            tabHost.addTab(
+                    tabHost.newTab()
+                            .setText(adapter.getPageTitle(i))
+                            .setTabListener(this)
+            );
+
+        }
 
         if(getIntent().getStringExtra("caller") == "AlarmReciever"){
             NotificationCounter.setPendingNotificationsCount(0);
@@ -41,7 +85,6 @@ public class BookmarkList extends BaseActivity {
         sharedPreferences.edit().putString("notificationText", "");
         Log.d("praveen panduru", "setting shared values to 0 and null");
         sharedPreferences.edit().commit();
-        */
 
         Realm realm = Realm.getInstance(getBaseContext());
         RealmQuery<BookMark> query = realm.where(BookMark.class);
@@ -49,17 +92,21 @@ public class BookmarkList extends BaseActivity {
 
         linkUrl = new String[result1.size()];
         linkAlarm = new String[result1.size()];
+        linkTitle = new String[result1.size()];
+
         int i =0;
         for (BookMark lot : result1) {
             linkUrl[i] = lot.getLinkUrl();
             linkAlarm[i] = lot.getLinkAlarmTime();
+            linkTitle[i] = lot.getLinkTitle();
             i++;
         }
 
         CustomListAdapter adapter;
-        adapter = new CustomListAdapter(BookmarkList.this, linkUrl, linkAlarm);
+        adapter = new CustomListAdapter(BookmarkList.this, linkTitle, linkAlarm);
         list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
+        */
     }
 
     @Override
@@ -82,5 +129,50 @@ public class BookmarkList extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTabSelected(MaterialTab materialTab) {
+        pager.setCurrentItem(materialTab.getPosition());
+
+    }
+
+    @Override
+    public void onTabReselected(MaterialTab materialTab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(MaterialTab materialTab) {
+
+    }
+
+
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+
+        }
+
+        public Fragment getItem(int num) {
+            return new FragmentText();
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if(position==0)
+                return "RECENT";
+            else if(position ==1)
+                return "ALL";
+            else
+                return "FAVOURITE";
+        }
+
     }
 }

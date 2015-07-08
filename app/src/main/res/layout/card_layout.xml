@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="2dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/linkcardtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:text="contact det"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:ellipsize="none"
+            android:maxLines="2"
+            android:scrollHorizontally="false"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+
+        <TextView
+            android:id="@+id/linkcardsnoozetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:gravity="left"
+            android:textSize="14sp"
+            android:layout_below="@id/linkcardtitle"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+
+        <TextView
+            android:id="@+id/linkcardread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Surname"
+            android:gravity="right"
+            android:textSize="14sp"
+            android:layout_below="@id/linkcardtitle"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/linkcardsnoozetime"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linkcardsnoozetime"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#FFFFFF">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bell_ring"
+                android:id="@+id/bellbutton"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete"
+                android:id="@+id/deletebutton"
+                android:layout_weight="1"
+                android:background="#FFFFFF"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/heart"
+                android:id="@+id/likebutton"
+                android:layout_weight="1"
+                android:background="#FFFFFF"/>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

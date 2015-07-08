@@ -45,9 +45,8 @@ public class SnoozeActivity extends BaseActivity implements
     TextView webTitle;
     TextView webLink;
     NumberPicker minPicker;
-    String sharedText = "";
-    String sharedTitle = "";
-    String localSharedText = "";
+    String sharedText, sharedTitle, localSharedText, localSharedTitle = "";
+
     TextView datenum, dateam_pm, datetext;
     private static final String[] ITEMS = {"Morning 9:00AM", "Afternoon 1:00PM", "Evening 5:00PM", "Night 9:00PM", "After sometime..", "Pick a time.."};
     private ArrayAdapter<String> adapter;
@@ -301,6 +300,7 @@ public class SnoozeActivity extends BaseActivity implements
             webTitle.setText(sharedTitle);
             webLink.setText(sharedText);
             localSharedText = sharedText;
+            localSharedTitle = sharedTitle;
 
         }
     }
@@ -370,6 +370,7 @@ public class SnoozeActivity extends BaseActivity implements
         BookMark newLink = realm.createObject(BookMark.class);
         newLink.setLinkId((int)realm.where(BookMark.class).maximumInt("linkId") + 1);
         newLink.setLinkUrl(localSharedText);
+        newLink.setLinkTitle(localSharedTitle);
 
         Date d = new Date(time);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
